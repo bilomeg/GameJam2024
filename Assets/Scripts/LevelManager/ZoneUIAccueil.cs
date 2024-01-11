@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ZoneUIAccueil : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void DebutGame(){
+          //int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene("SceneSallePrincipale");
+      
     }
-
-    // Update is called once per frame
-    void Update()
+   public void QuiteGame()
     {
-        
+        Debug.Log($"fonctionne");
+        Application.Quit();
     }
 }
