@@ -43,6 +43,7 @@ public class PerdreVie : MonoBehaviour
             scriptVie.nombreVie = 0;
             Debug.Log("Vaisseau mort");
             Destroy(player);
+            LevelManager.Instance.LoadAsyncScene("SceneSallePrincipale");
         }
     }
 }
