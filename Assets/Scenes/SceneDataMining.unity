@@ -27390,11 +27390,12 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
-  Terre: {fileID: 2100000, guid: d206bd7b8ac93b244bca8703ae398da4, type: 2}
-  Minerai: {fileID: 2100000, guid: dc5f50d361330a34b8bed3b9bd66624e, type: 2}
-  Terre1: {fileID: 2100000, guid: 58aa99f6dee1ce6478a1a9faacfa7e69, type: 2}
-  Minerai1: {fileID: 2100000, guid: 7d768cd946ee3044d99fa40a64e2707d, type: 2}
+  terre1: {fileID: 2100000, guid: 58aa99f6dee1ce6478a1a9faacfa7e69, type: 2}
+  terre2: {fileID: 2100000, guid: af5ed77f34a85a445804faab187af298, type: 2}
+  minerai1: {fileID: 2100000, guid: dc5f50d361330a34b8bed3b9bd66624e, type: 2}
+  minerai2: {fileID: 2100000, guid: 80d7723aafd1d5d498dde3800d7eef94, type: 2}
   _infosDataMining: {fileID: 11400000, guid: e9b1d23e9e371654fb57ea52d0d3d2d9, type: 2}
+  Cube: {fileID: 2131745401}
 --- !u!4 &1913816035 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8168011208966268877, guid: 93bff57545500594dba5249bbc7025ce,
@@ -31274,6 +31275,12 @@ PrefabInstance:
 --- !u!4 &2131745399 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8168011208966268877, guid: 93bff57545500594dba5249bbc7025ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 351808916}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2131745401 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6994572045967695010, guid: 93bff57545500594dba5249bbc7025ce,
     type: 3}
   m_PrefabInstance: {fileID: 351808916}
   m_PrefabAsset: {fileID: 0}
