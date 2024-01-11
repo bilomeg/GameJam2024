@@ -11,7 +11,7 @@ public class VictoireMining : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _levelManager = LevelManager.Instance;
     }
 
     // Update is called once per frame
@@ -20,13 +20,13 @@ public class VictoireMining : MonoBehaviour
         if(infosDataMining._tempsEcoule <= 0){
             if(infosDataMining._nbPoints >= 15){
                 Debug.Log("Victoire");
-                //_levelManager.LoadAsyncScene("SceneSallePrincipale");
+                _levelManager.LoadAsyncScene("SceneSallePrincipale");
                 infosGame.dataMining[0].completed = true;
             }
             else{
                 Debug.Log("Defaite");
                 infosGame.dataMining[0].completed = false;
-                 //_levelManager.LoadAsyncScene("SceneSallePrincipale");
+                _levelManager.LoadAsyncScene("SceneSallePrincipale");
             }
         }
     }

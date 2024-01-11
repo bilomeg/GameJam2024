@@ -14,6 +14,6 @@ public class PastilleSpaceInvaders : MonoBehaviour
     // Update is called once per frame
      private void OnTriggerEnter(Collider other)
  {
-    _levelManager.LoadAsyncScene(LevelManager.Scene.SceneSpaceInvader);
+    _levelManager.LoadAsyncScene("SceneSpaceInvader");
  }
 }

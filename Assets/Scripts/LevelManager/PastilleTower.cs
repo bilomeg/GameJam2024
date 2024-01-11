@@ -14,6 +14,6 @@ public class PastilleTower : MonoBehaviour
     // Update is called once per frame
       private void OnTriggerEnter(Collider other)
  {
-    _levelManager.LoadAsyncScene(LevelManager.Scene.TowerDefense);
+    _levelManager.LoadAsyncScene("Tower Defense");
  }
 }
