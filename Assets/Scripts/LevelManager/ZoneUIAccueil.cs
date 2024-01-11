@@ -7,9 +7,18 @@ using UnityEngine.UI;
 
 public class ZoneUIAccueil : MonoBehaviour
 {
+    
+ 
+    private LevelManager _levelManager;
+       // Start is called before the first frame update
+    void Start()
+    {
+        _levelManager = LevelManager.Instance;
+        
+    }
     public void DebutGame(){
-          //int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        SceneManager.LoadScene("SceneSallePrincipale");
+         
+        _levelManager.LoadAsyncScene(LevelManager.Scene.SceneSallePrincipale);
       
     }
    public void QuiteGame()
@@ -17,4 +26,7 @@ public class ZoneUIAccueil : MonoBehaviour
         Debug.Log($"fonctionne");
         Application.Quit();
     }
+
+
+    
 }
