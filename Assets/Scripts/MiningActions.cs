@@ -11,10 +11,12 @@ public class MiningActions : MonoBehaviour
    RaycastHit hit2;
    [SerializeField]GameObject finder;
     public LayerMask layerMask;
-
+    [SerializeField] private Material oldMaterial;
+    [SerializeField] private Material newMaterial;
      private int nombreClics = 0;
     [SerializeField] private InfosDataMining _infosDataMining;
     private int _nbPoints = 2;
+        public Renderer Cube;
     private void Update()
     {
         if(Input.GetMouseButtonDown(0)){
@@ -40,11 +42,16 @@ public class MiningActions : MonoBehaviour
 
                         if (nombreClics == 1)
                         {
-                            ChangerCouleurBloc(hit2.transform, Color.red);
+                            //ChangerMaterialBloc(hit2.transform, Color.red);
+                                    var materials = Cube.materials;
+            // exchange one material
+            materials[1] = oldMaterial; 
+            // reassign the materials to the renderer
+            Cube.materials = materials;
                         }
                         else if (nombreClics == 2)
                         {
-                            ChangerCouleurBloc(hit2.transform, Color.blue);
+                            ChangerMaterialBloc(hit2.transform, Color.blue);
                         }
                         else if (nombreClics == 3)
                         {
@@ -57,11 +64,11 @@ public class MiningActions : MonoBehaviour
 
                         if (nombreClics == 1)
                         {
-                            ChangerCouleurBloc(hit2.transform, Color.yellow);
+                            ChangerMaterialBloc(hit2.transform, Color.yellow);
                         }
                         else if (nombreClics == 2)
                         {
-                            ChangerCouleurBloc(hit2.transform, Color.green);
+                            ChangerMaterialBloc(hit2.transform, Color.green);
                         }
                         else if (nombreClics == 3)
                         {
@@ -79,7 +86,7 @@ public class MiningActions : MonoBehaviour
 
         }
     }
-    public void ChangerCouleurBloc(Transform blocTransform, Color nouvelleCouleur){
+    public void ChangerMaterialBloc(Transform blocTransform, Color nouvelleCouleur){
           Renderer blocRenderer = blocTransform.GetComponent<Renderer>();
         if (blocRenderer != null)
         {

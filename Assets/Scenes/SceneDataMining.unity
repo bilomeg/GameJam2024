@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -27390,6 +27390,10 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  Terre: {fileID: 2100000, guid: d206bd7b8ac93b244bca8703ae398da4, type: 2}
+  Minerai: {fileID: 2100000, guid: dc5f50d361330a34b8bed3b9bd66624e, type: 2}
+  Terre1: {fileID: 2100000, guid: 58aa99f6dee1ce6478a1a9faacfa7e69, type: 2}
+  Minerai1: {fileID: 2100000, guid: 7d768cd946ee3044d99fa40a64e2707d, type: 2}
   _infosDataMining: {fileID: 11400000, guid: e9b1d23e9e371654fb57ea52d0d3d2d9, type: 2}
 --- !u!4 &1913816035 stripped
 Transform:
