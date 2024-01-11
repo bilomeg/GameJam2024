@@ -48,7 +48,10 @@ public class LevelManager : MonoBehaviour
     }
 public enum Scene{
         SceneIntro,
-        SceneSallePrincipale
+        SceneSallePrincipale,
+        SceneDataMining,
+        SceneSpaceInvader,
+        TowerDefense
 
     }
 
