@@ -11,10 +11,18 @@ public class TowerDefenseLevelInfo : ScriptableObject
     // ---------------------
 
     [System.Serializable]
+    public class LevelLimit
+    {
+        public Vector2 minPos;
+        public Vector2 maxPos;
+    }
+
+    [System.Serializable]
     public class EnemyWave
     {
         [Header("Wave Information")]
         public GameObject enemiesPrefab;
+        public Vector3 spawnLocation;
         public int numberToSpawn;
         [Space(5)]
 
@@ -27,7 +35,9 @@ public class TowerDefenseLevelInfo : ScriptableObject
     // ---------------------
 
     [Header("Level's Information")]
-    public int maxTower;
+    public LevelLimit levelLimit;
+    public float floorLevel;
+    public Vector3 destination;
     [Space(5)]
 
     public int moneyAtStart;
