@@ -8,6 +8,8 @@ public class MiningActions : MonoBehaviour
    RaycastHit hit2;
    [SerializeField]GameObject finder;
     public LayerMask layerMask;
+
+     private int nombreClics = 0;
    
     private void Update()
     {
@@ -25,9 +27,44 @@ public class MiningActions : MonoBehaviour
 
             
             if(Physics.Raycast (ray2, out hit2, 100,layerMask)){
-                hit2.transform.GetComponent<Renderer>().material.color = Color.red;
+                //hit2.transform.GetComponent<Renderer>().material.color = Color.red;
                 //Destroy(hit2.transform.gameObject);
                 
+           if (hit2.transform.CompareTag("BlocTerre"))
+                    {
+                        nombreClics++;
+
+                        if (nombreClics == 1)
+                        {
+                            ChangerCouleurBloc(hit2.transform, Color.red);
+                        }
+                        else if (nombreClics == 2)
+                        {
+                            ChangerCouleurBloc(hit2.transform, Color.blue);
+                        }
+                        else if (nombreClics == 3)
+                        {
+                            DetruireBloc(hit2.transform.gameObject);
+                        }
+                    }
+                      if (hit2.transform.CompareTag("BlocMinerai"))
+                    {
+                        nombreClics++;
+
+                        if (nombreClics == 1)
+                        {
+                            ChangerCouleurBloc(hit2.transform, Color.yellow);
+                        }
+                        else if (nombreClics == 2)
+                        {
+                            ChangerCouleurBloc(hit2.transform, Color.green);
+                        }
+                        else if (nombreClics == 3)
+                        {
+                            DetruireBloc(hit2.transform.gameObject);
+                        }
+                    }
+                    
             }
             
         }
@@ -36,8 +73,19 @@ public class MiningActions : MonoBehaviour
 
         }
     }
-    public void ChangerCouleurBloc(){
-        
+    public void ChangerCouleurBloc(Transform blocTransform, Color nouvelleCouleur){
+          Renderer blocRenderer = blocTransform.GetComponent<Renderer>();
+        if (blocRenderer != null)
+        {
+            // Changer la couleur du matériau ici, par exemple en rouge
+            blocRenderer.material.color = nouvelleCouleur;
+        }
+       
+    }
+     public void DetruireBloc(GameObject blocGameObject)
+    {
+        Destroy(blocGameObject);
+        nombreClics = 0; // Réinitialiser le compteur après la destruction
     }
      
 }
