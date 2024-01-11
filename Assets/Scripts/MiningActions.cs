@@ -10,7 +10,8 @@ public class MiningActions : MonoBehaviour
     public LayerMask layerMask;
 
      private int nombreClics = 0;
-   
+    [SerializeField] private InfosDataMining _infosDataMining;
+    private int _nbPoints = 2;
     private void Update()
     {
         if(Input.GetMouseButtonDown(0)){
@@ -62,6 +63,8 @@ public class MiningActions : MonoBehaviour
                         else if (nombreClics == 3)
                         {
                             DetruireBloc(hit2.transform.gameObject);
+                            _infosDataMining._nbPoints += _nbPoints;
+                           
                         }
                     }
                     
