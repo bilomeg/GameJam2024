@@ -18,15 +18,15 @@ public class MiningActions : MonoBehaviour
 
 
         if (Physics.Raycast (ray, out hit, 100)) {
-            Debug.Log (hit.transform.name);
-            Debug.Log ("hit");
+           // Debug.Log (hit.transform.name);
+           // Debug.Log ("hit");
             finder.transform.LookAt(hit.transform.position);
             Ray ray2 = new Ray(finder.transform.position, hit.transform.position-finder.transform.position);
 
             
             if(Physics.Raycast (ray2, out hit2, 100,layerMask)){
-                //hit2.transform.GetComponent<Renderer>().material.color = Color.red;
-                Destroy(hit2.transform.gameObject);
+                hit2.transform.GetComponent<Renderer>().material.color = Color.red;
+                //Destroy(hit2.transform.gameObject);
                 
             }
             
@@ -35,6 +35,9 @@ public class MiningActions : MonoBehaviour
             
 
         }
+    }
+    public void ChangerCouleurBloc(){
+        
     }
      
 }
