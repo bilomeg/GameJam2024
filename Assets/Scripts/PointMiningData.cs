@@ -18,7 +18,7 @@ public class PointMiningData : MonoBehaviour
 
        public void AfficherPoints(){
        
-       _texteNbPoints.text = _infosDataMining._nbPoints.ToString();
+       _texteNbPoints.text = _infosDataMining._nbPoints.ToString()+" points";
          
     }
 }

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MiningActions : MonoBehaviour
 {
@@ -90,5 +93,19 @@ public class MiningActions : MonoBehaviour
         Destroy(blocGameObject);
         nombreClics = 0; // Réinitialiser le compteur après la destruction
     }
-     
+      private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Réinitialiser les points à zéro
+        _infosDataMining._nbPoints = 0;
+        _infosDataMining._tempsEcoule = 60f;
+    } 
 }
