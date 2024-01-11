@@ -18,7 +18,7 @@ public class DetruireProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ennemis"){
+        if(other.tag == "Ennemie"){
             Destroy(other);
             Destroy(gameObject);
         }
