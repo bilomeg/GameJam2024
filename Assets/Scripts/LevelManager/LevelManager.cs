@@ -31,9 +31,9 @@ public class LevelManager : MonoBehaviour
     public async void LoadAsyncScene(string sceneName)
     {
         var sceneLoad = SceneManager.LoadSceneAsync(sceneName);
-       // sceneLoad.allowSceneActivation = false;
+        //sceneLoad.allowSceneActivation = false;
 
-        _loaderCanvas.SetActive(true);
+        //_loaderCanvas.SetActive(true);
           
         do {
             await Task.Delay(40000);
@@ -42,9 +42,10 @@ public class LevelManager : MonoBehaviour
             }
           
         } while (sceneLoad.progress < 0.9f);
+        
 
         sceneLoad.allowSceneActivation = true;
-//        _loaderCanvas.SetActive(false);
+        //_loaderCanvas.SetActive(false);
     }
 public enum Scene{
         SceneIntro,
