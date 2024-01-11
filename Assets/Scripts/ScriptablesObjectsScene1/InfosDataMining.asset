@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbe5b0b64b8d0e48b0619496465a74c, type: 3}
   m_Name: InfosDataMining
   m_EditorClassIdentifier: 
-  _tempsDeJeu: 0
+  _tempsDeJeu: 60
   _tempsEcoule: 0
   _nbPoints: 0
