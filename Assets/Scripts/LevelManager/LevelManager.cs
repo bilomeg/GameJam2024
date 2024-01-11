@@ -28,9 +28,9 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName.ToString());
     }
-    public async void LoadAsyncScene(Scene sceneName)
+    public async void LoadAsyncScene(string sceneName)
     {
-        var sceneLoad = SceneManager.LoadSceneAsync(sceneName.ToString());
+        var sceneLoad = SceneManager.LoadSceneAsync(sceneName);
        // sceneLoad.allowSceneActivation = false;
 
         _loaderCanvas.SetActive(true);

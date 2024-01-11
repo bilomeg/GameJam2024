@@ -18,7 +18,7 @@ public class ZoneUIAccueil : MonoBehaviour
     }
     public void DebutGame(){
          
-        _levelManager.LoadAsyncScene(LevelManager.Scene.SceneSallePrincipale);
+        _levelManager.LoadAsyncScene("SceneSallePrincipale");
       
     }
    public void QuiteGame()
