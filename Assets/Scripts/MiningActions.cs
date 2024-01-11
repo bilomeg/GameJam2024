@@ -11,10 +11,14 @@ public class MiningActions : MonoBehaviour
    RaycastHit hit2;
    [SerializeField]GameObject finder;
     public LayerMask layerMask;
-
+    [SerializeField] private Material terre1;
+    [SerializeField] private Material terre2;
+      [SerializeField] private Material minerai1;
+    [SerializeField] private Material minerai2;
      private int nombreClics = 0;
     [SerializeField] private InfosDataMining _infosDataMining;
     private int _nbPoints = 2;
+        public Renderer Cube;
     private void Update()
     {
         if(Input.GetMouseButtonDown(0)){
@@ -36,15 +40,28 @@ public class MiningActions : MonoBehaviour
                 
            if (hit2.transform.CompareTag("BlocTerre"))
                     {
+                        Cube = hit2.transform.GetComponent<Renderer>();
                         nombreClics++;
 
                         if (nombreClics == 1)
                         {
-                            ChangerCouleurBloc(hit2.transform, Color.red);
+                            //ChangerMaterialBloc(hit2.transform, Color.red);
+                            var materials = Cube.materials;
+                            // exchange one material
+                            materials[1] = terre1;
+                            // reassign the materials to the renderer
+                            Cube.materials = materials;
+                            Debug.Log(Cube.materials[0]);
+                            Debug.Log(Cube.materials[1]);
                         }
                         else if (nombreClics == 2)
                         {
-                            ChangerCouleurBloc(hit2.transform, Color.blue);
+                            //ChangerMaterialBloc(hit2.transform, Color.red);
+                            var materials = Cube.materials;
+                            // exchange one material
+                            materials[1] = terre2; 
+                            // reassign the materials to the renderer
+                            Cube.materials = materials;
                         }
                         else if (nombreClics == 3)
                         {
@@ -53,15 +70,24 @@ public class MiningActions : MonoBehaviour
                     }
                       if (hit2.transform.CompareTag("BlocMinerai"))
                     {
+                        Cube = hit2.transform.GetComponent<Renderer>();
                         nombreClics++;
 
                         if (nombreClics == 1)
                         {
-                            ChangerCouleurBloc(hit2.transform, Color.yellow);
+                             var materials = Cube.materials;
+                            // exchange one material
+                            materials[1] = minerai1;
+                            // reassign the materials to the renderer
+                            Cube.materials = materials;
                         }
                         else if (nombreClics == 2)
                         {
-                            ChangerCouleurBloc(hit2.transform, Color.green);
+                             var materials = Cube.materials;
+                            // exchange one material
+                            materials[1] = minerai2;
+                            // reassign the materials to the renderer
+                            Cube.materials = materials;
                         }
                         else if (nombreClics == 3)
                         {
@@ -79,7 +105,7 @@ public class MiningActions : MonoBehaviour
 
         }
     }
-    public void ChangerCouleurBloc(Transform blocTransform, Color nouvelleCouleur){
+    public void ChangerMaterialBloc(Transform blocTransform, Color nouvelleCouleur){
           Renderer blocRenderer = blocTransform.GetComponent<Renderer>();
         if (blocRenderer != null)
         {

@@ -18,7 +18,7 @@ public class VictoireMining : MonoBehaviour
     void Update()
     {
         if(infosDataMining._tempsEcoule <= 0){
-            if(infosDataMining._nbPoints >= 15){
+            if(infosDataMining._nbPoints >= 16){
                 Debug.Log("Victoire");
                 _levelManager.LoadAsyncScene("SceneSallePrincipale");
                 infosGame.dataMining[0].completed = true;
