@@ -17,16 +17,16 @@ public class MiningActions : MonoBehaviour
               layerMask = ~layerMask;
 
 
-        if (Physics.Raycast (ray, out hit, 100,layerMask)) {
+        if (Physics.Raycast (ray, out hit, 100)) {
             Debug.Log (hit.transform.name);
             Debug.Log ("hit");
             finder.transform.LookAt(hit.transform.position);
             Ray ray2 = new Ray(finder.transform.position, hit.transform.position-finder.transform.position);
 
             
-            if(Physics.Raycast (ray2, out hit2, 100)){
-                hit2.transform.GetComponent<Renderer>().material.color = Color.red;
-                //Destroy(hit2.transform.gameObject);
+            if(Physics.Raycast (ray2, out hit2, 100,layerMask)){
+                //hit2.transform.GetComponent<Renderer>().material.color = Color.red;
+                Destroy(hit2.transform.gameObject);
                 
             }
             
