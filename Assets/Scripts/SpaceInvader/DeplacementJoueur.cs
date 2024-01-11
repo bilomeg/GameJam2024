@@ -12,7 +12,7 @@ public class DeplacementJoueur : MonoBehaviour
     //Pour le shoot
     [SerializeField] private GameObject projectile;
     [SerializeField] private float vitesseProjectile = 3.0f;
-     private List<GameObject> projectilesEnMouvement = new List<GameObject>();
+    private List<GameObject> projectilesEnMouvement = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
