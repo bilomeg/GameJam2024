@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6ff7e797af13542b204a92337016b9, type: 3}
   m_Name: InfosGame
   m_EditorClassIdentifier: 
-  towerDefense: []
+  towerDefense:
+  - sceneName: 
+    completed: 0
+  spaceInvaders:
+  - sceneName: 
+    completed: 0
+  dataMining:
+  - sceneName: 
+    completed: 0
