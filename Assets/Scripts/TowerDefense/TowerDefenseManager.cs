@@ -12,6 +12,8 @@ public class TowerDefenseManager : MonoBehaviour
     // Variables
     // ---------------------
 
+    public int numberOfEnemy;
+
     // ---------------------
     // Functions
     // ---------------------
