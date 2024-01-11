@@ -14,7 +14,7 @@ public class FollowTarget : MonoBehaviour
     // done in LateUpdate to allow the target to have the chance to move first in Update
     private void LateUpdate()
     {
-        target = GameObject.Find("Joueur").transform;
+        target = GameObject.Find("PlayerPoint").transform;
         if(lookAtTarget){
             transform.LookAt(target);
         }
