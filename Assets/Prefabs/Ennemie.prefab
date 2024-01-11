@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5488602530983712353}
   - component: {fileID: 922195100158494600}
   - component: {fileID: 1518016488504745549}
-  - component: {fileID: 5481546913108069728}
   - component: {fileID: 5379294937942716605}
+  - component: {fileID: 3380453764904945991}
   m_Layer: 0
   m_Name: Ennemie
   m_TagString: Ennemie
@@ -86,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5481546913108069728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6466334626587371863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 497f76da44e51db439469e4c3038bf4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 8550155541710064120}
-  vitesseProjectile: 3
 --- !u!65 &5379294937942716605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -121,6 +107,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3380453764904945991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6466334626587371863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 497f76da44e51db439469e4c3038bf4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 8550155541710064120}
+  vitesseProjectile: 3
 --- !u!1 &8550155541710064120
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 7187656933835309792}
   - component: {fileID: 136598900925635899}
   - component: {fileID: 1783357894084326651}
-  - component: {fileID: 8311919314422402438}
+  - component: {fileID: 1185146909403107535}
   - component: {fileID: 2372426570155265559}
   m_Layer: 0
   m_Name: ProjectileEnnemie
@@ -230,7 +230,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &8311919314422402438
+--- !u!114 &1185146909403107535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8550155541710064120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ae93dcd71441444484b6d4e7bfa7eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 97beac3b36a74f543a2c2a5e131dd1ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &2372426570155265559

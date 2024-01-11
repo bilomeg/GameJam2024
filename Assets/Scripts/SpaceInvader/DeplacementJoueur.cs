@@ -12,7 +12,7 @@ public class DeplacementJoueur : MonoBehaviour
     //Pour le shoot
     [SerializeField] private GameObject projectile;
     [SerializeField] private float vitesseProjectile = 3.0f;
-    private List<GameObject> projectilesEnMouvement = new List<GameObject>();
+    //private List<GameObject> projectilesEnMouvement = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class DeplacementJoueur : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BougeProjectiles();
+        //BougeProjectiles();
         Bouge();
     }
 
@@ -36,28 +36,29 @@ public class DeplacementJoueur : MonoBehaviour
 
     public void OnShoot(InputValue value)
     {
-        GameObject nouveauProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
-        projectilesEnMouvement.Add(nouveauProjectile);
+        //GameObject nouveauProjectile = 
+        Instantiate(projectile, transform.position, Quaternion.identity);
+        //projectilesEnMouvement.Add(nouveauProjectile);
     }
 
     void Bouge(){
         transform.Translate(Vector3.forward * Time.deltaTime * vitesse * mouvementHorizontal);
     }
 
-    void BougeProjectiles()
-    {
-        for (int i = 0; i < projectilesEnMouvement.Count; i++)
-        {
-            if (projectilesEnMouvement[i] != null)
-            {
-                projectilesEnMouvement[i].transform.Translate(Vector3.up * Time.deltaTime * vitesseProjectile);
-            }
-            else
-            {
-                // Retirer le projectile s'il a été détruit
-                projectilesEnMouvement.RemoveAt(i);
-                i--;
-            }
-        }
-    }
+    // void BougeProjectiles()
+    // {
+    //     for (int i = 0; i < projectilesEnMouvement.Count; i++)
+    //     {
+    //         if (projectilesEnMouvement[i] != null)
+    //         {
+    //             projectilesEnMouvement[i].transform.Translate(Vector3.up * Time.deltaTime * vitesseProjectile);
+    //         }
+    //         else
+    //         {
+    //             // Retirer le projectile s'il a été détruit
+    //             projectilesEnMouvement.RemoveAt(i);
+    //             i--;
+    //         }
+    //     }
+    // }
 }
