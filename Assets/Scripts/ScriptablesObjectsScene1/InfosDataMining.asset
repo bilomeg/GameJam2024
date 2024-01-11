@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: InfosDataMining
   m_EditorClassIdentifier: 
   _tempsDeJeu: 60
-  _tempsEcoule: 60
-  _nbPoints: 0
+  _tempsEcoule: 0
+  _nbPoints: 15
