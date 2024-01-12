@@ -9,6 +9,8 @@ public class MiningActions : MonoBehaviour
 {
    RaycastHit hit;
    RaycastHit hit2;
+   [SerializeField] private Transform camera;
+   [SerializeField] private Vector3 cameraOffset;
    [SerializeField]GameObject finder;
     public LayerMask layerMask;
     [SerializeField] private Material terre1;
@@ -24,6 +26,9 @@ Cursor.lockState = CursorLockMode.None;
         }
     private void Update()
     {
+        // Move Camera
+        camera.position = transform.position + cameraOffset;
+
         if(Input.GetMouseButtonDown(0)){
              Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
                int layerMask = 1 << LayerMask.NameToLayer("Player");
