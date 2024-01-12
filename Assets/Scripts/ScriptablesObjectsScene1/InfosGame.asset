@@ -16,8 +16,8 @@ MonoBehaviour:
   - sceneName: Tower Defense
     completed: 0
   spaceInvaders:
-  - sceneName: 
+  - sceneName: SceneSpaceInvader
     completed: 0
   dataMining:
-  - sceneName: 
+  - sceneName: SceneDataMining
     completed: 0
