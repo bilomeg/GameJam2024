@@ -46,6 +46,10 @@ public class PlayerInteraction : MonoBehaviour
     InfosGame infosGame;
     [SerializeField] LevelSelect levelSelect;
 
+    [Header("Pet")]
+    [SerializeField] GameObject particle;
+    [SerializeField] AudioSource celebrate;
+
     // ---------------------
     // Functions
     // ---------------------
@@ -56,7 +60,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void ChangeHoverUI(PlayerInteractor interactor)
     {
-        if(hoverCamera != null)
+        if(hoverCamera != null && interactionType == InteractionType.SceneLoader)
         {
             // Set Variables
             hoverCamera.SetActive(true);
@@ -130,11 +134,33 @@ public class PlayerInteraction : MonoBehaviour
             canvas.GetComponent<CanvasGroup>().alpha = 0;
             canvas.GetComponent<CanvasGroup>().DOFade(1, interactor.uiReferences.transitionTime).SetEase(Ease.InOutCirc);
         }
+
+        if(interactionType == InteractionType.Pet)
+        {
+            // Set Variables
+            string inputString = InputControlPath.ToHumanReadableString(interactor.playerInput.actions.FindAction("Interact").bindings[0].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+            // Change All Text
+            interactor.uiReferences.interactionText.text = uiText.interactionText + "'" + inputString + "'";
+            interactor.uiReferences.actionText.text = uiText.actionText;
+            
+            interactor.uiReferences.informationText.transform.gameObject.SetActive(false);
+
+            // Set Canvas Settings
+            RectTransform canvas = interactor.uiReferences.canvas;
+            canvas.localPosition = new Vector2(0, interactor.uiReferences.canvas.localPosition.y);
+            canvas.DOLocalMove(interactor.uiReferences.defaultPos, interactor.uiReferences.transitionTime).SetEase(Ease.InOutCirc);
+
+            canvas.GetComponent<CanvasGroup>().alpha = 0;
+            canvas.GetComponent<CanvasGroup>().DOFade(1, interactor.uiReferences.transitionTime).SetEase(Ease.InOutCirc);
+        }
+
     }
 
     public void HideHoverUI(PlayerInteractor interactor)
     {
-        if(hoverCamera != null)
+        if(interactionType == InteractionType.Pet || interactionType == InteractionType.SceneLoader && hoverCamera != null)
         {
             // Set Variables
             hoverCamera.SetActive(false);
@@ -145,7 +171,6 @@ public class PlayerInteraction : MonoBehaviour
             canvas.DOLocalMove(newPos, interactor.uiReferences.transitionTime).SetEase(Ease.InOutCirc);
             canvas.GetComponent<CanvasGroup>().DOFade(0, interactor.uiReferences.transitionTime).SetEase(Ease.InOutCirc);
         }
-
     }
 
     public void Interact()
@@ -198,6 +223,16 @@ public class PlayerInteraction : MonoBehaviour
                 if(!alreadyLoaded)
                 LevelManager.Instance.LoadAsyncScene(infosGame.dataMining[infosGame.dataMining.Length -1].sceneName);
             }
+        }
+
+        if(interactionType == InteractionType.Pet)
+        {
+            // Create Particle
+            var instance = Instantiate(particle, transform);
+            instance.name = "YOOPIII";
+
+            // Play Audio
+            celebrate.Play();
         }
     }
 }
