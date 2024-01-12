@@ -22,6 +22,10 @@ public class InfosGame : ScriptableObject
     void OnEnable()
     {
         instance = this;
+
+        spaceInvaders[0].completed = false;
+        dataMining[0].completed = false;
+        towerDefense[0].completed = false;
     }
 }
 
