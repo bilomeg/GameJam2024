@@ -16,4 +16,12 @@ public class InfosGame : ScriptableObject
     public Levels[] towerDefense;
     public Levels[] spaceInvaders;
     public Levels[] dataMining;
+
+    [HideInInspector] public static InfosGame instance;
+
+    void OnEnable()
+    {
+        instance = this;
+    }
 }
+
