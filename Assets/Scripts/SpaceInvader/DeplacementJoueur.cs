@@ -15,8 +15,7 @@ public class DeplacementJoueur : MonoBehaviour
     private bool canShoot = true;
     [SerializeField] private float intervalShoot;
 
-    //Pour l'animation de tournant
-    [SerializeField] private Animator animateur;
+    //Pour le tournant
     [SerializeField] private GameObject vaisseau;
     Quaternion vaisseauRotation;
 
