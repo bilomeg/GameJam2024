@@ -25,8 +25,8 @@ public class TowerDefensePlayer : MonoBehaviour
     // Variables
     // ---------------------
 
-    [HideInInspector]
-    public TowerDefenseLevelInfo levelInfo;
+    [HideInInspector] public TowerDefenseLevelInfo levelInfo;
+    [HideInInspector] public TowerDefenseManager towerManager;
 
     [Header("Player's Info")]
     public int currentMoney;
@@ -273,7 +273,9 @@ public class TowerDefensePlayer : MonoBehaviour
 
     public void OnStartMission()
     {
-
+        // Call Functions
+        if(!towerManager.started)
+        towerManager.StartMission();
     }
 
     public void OnSelect()

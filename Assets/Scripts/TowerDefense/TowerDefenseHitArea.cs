@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TowerDefenseHitArea : MonoBehaviour
@@ -106,6 +107,20 @@ public class TowerDefenseHitArea : MonoBehaviour
                 StartCoroutine("Shoot");
             }
 
+            else
+            {
+                bool hasOtherInside = false;
+                for(int i = 0;i < collidingObjects.Length;i++)
+                if(collidingObjects[i] != null)
+                hasOtherInside = true;
+
+                if(hasOtherInside)
+                {
+                    SpliceCollidingAray(0);
+                    StartCoroutine("Shoot");
+                }
+            }
+
         }
     }
     // ---------------------
@@ -116,18 +131,14 @@ public class TowerDefenseHitArea : MonoBehaviour
     {
         if(other.GetComponent<TowerDefenseObjects>() != null)
         {
-            Debug.Log("are u even called?");
             TowerDefenseObjects otherObject = other.GetComponent<TowerDefenseObjects>();
             if(otherObject.objectType == TowerDefenseObjects.ObjectType.Enemy)
             {
-                Debug.Log("are u even called? 2");
                 bool alreadyImplemented = false;
                 for(int i = 0;i < collidingObjects.Length;i++)
                 {
-                    Debug.Log("are u even called? 3");
                     if(!alreadyImplemented && collidingObjects[i] == null)
                     {
-                        Debug.Log("are u even called? 4");
                         alreadyImplemented = true;
                         collidingObjects[i] = other.gameObject;
 

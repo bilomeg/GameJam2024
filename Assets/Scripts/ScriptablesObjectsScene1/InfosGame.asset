@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: InfosGame
   m_EditorClassIdentifier: 
   towerDefense:
-  - sceneName: 
+  - sceneName: Tower Defense
     completed: 0
   spaceInvaders:
   - sceneName: 
