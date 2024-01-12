@@ -2002,6 +2002,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 858657034}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1291651990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2448347944548842390, guid: 5b027eeef3d5b9041819feaefff6b029,
+    type: 3}
+  m_PrefabInstance: {fileID: 5181879084407126689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1291651997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291651990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796f839dd18d0714eae07a71c7da30cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelManager: {fileID: 8581260817706500894}
+  _dataMining: {fileID: 1427399872}
+  _tower: {fileID: 61153577}
+  _spaceInvader: {fileID: 1858889347}
 --- !u!1 &1313824962
 GameObject:
   m_ObjectHideFlags: 0
@@ -4224,7 +4246,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1034058264}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2448347944548842390, guid: 5b027eeef3d5b9041819feaefff6b029,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291651997}
   m_SourcePrefab: {fileID: 100100000, guid: 5b027eeef3d5b9041819feaefff6b029, type: 3}
 --- !u!33 &5626662057590720057
 MeshFilter:
@@ -4626,6 +4652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a70e4a71b37b78409a7f3165ef2d76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasToucheE: {fileID: 1858889347}
 --- !u!114 &8581260817706500894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4639,7 +4666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loaderCanvas: {fileID: 189816256912256314}
-  _levelManager: {fileID: 8581260817706500894}
   _barreProgression: {fileID: 8008734405283667022}
 --- !u!114 &8672057616207964071
 MonoBehaviour:
