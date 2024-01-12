@@ -6,6 +6,7 @@ public class ShootEnnemis : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
     [SerializeField] private float vitesseProjectile = 3.0f;
+    [SerializeField] private AudioSource _sonEnnemiesGunshot;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class ShootEnnemis : MonoBehaviour
     void TirerProjectile()
     {
         GameObject nouveauProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+        _sonEnnemiesGunshot.Play();
         nouveauProjectile.GetComponent<Rigidbody>().velocity = Vector3.down * vitesseProjectile;
     }
 }

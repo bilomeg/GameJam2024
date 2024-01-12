@@ -20,6 +20,8 @@ public class DeplacementJoueur : MonoBehaviour
     [SerializeField] private GameObject vaisseau;
     Quaternion vaisseauRotation;
 
+    [SerializeField] private AudioSource _sonShipGunshot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,7 @@ public class DeplacementJoueur : MonoBehaviour
     {
         if(canShoot){
             Instantiate(projectile, transform.position, Quaternion.identity);
+            _sonShipGunshot.Play();
             canShoot = false;
             Invoke("IntervalShoot", intervalShoot);
         }

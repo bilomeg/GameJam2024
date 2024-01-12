@@ -9,6 +9,7 @@ public class Victoire : MonoBehaviour
     private GameObject[] nbEnnemie;
 
     [SerializeField] private InfosGame infoGame;
+    [SerializeField] private AudioSource _sonWin;
 
     // Start is called before the first frame update
     void Start()
@@ -22,9 +23,15 @@ public class Victoire : MonoBehaviour
         nbEnnemie = GameObject.FindGameObjectsWithTag("Ennemie");
 
         if(nbEnnemie.Length == 0){
+            _sonWin.Play();
             Debug.Log("victoire");
             infoGame.spaceInvaders[0].completed = true;
-            LevelManager.Instance.LoadAsyncScene("SceneSallePrincipale");
+            
+            Invoke("ChangementScene", 3.0f);
         }
+    }
+
+    void ChangementScene(){
+        LevelManager.Instance.LoadAsyncScene("SceneSallePrincipale");
     }
 }
