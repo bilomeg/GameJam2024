@@ -164,6 +164,9 @@ public class PlayerInteraction : MonoBehaviour
                         LevelManager.Instance.LoadAsyncScene(infosGame.spaceInvaders[i].sceneName);
                     }
                 }
+
+                if(!alreadyLoaded)
+                LevelManager.Instance.LoadAsyncScene(infosGame.spaceInvaders[infosGame.spaceInvaders.Length -1].sceneName);
             }
 
             if(levelSelect == LevelSelect.TowerDefense)
@@ -176,6 +179,9 @@ public class PlayerInteraction : MonoBehaviour
                         LevelManager.Instance.LoadAsyncScene(infosGame.towerDefense[i].sceneName);
                     }
                 }
+
+                if(!alreadyLoaded)
+                LevelManager.Instance.LoadAsyncScene(infosGame.towerDefense[infosGame.towerDefense.Length -1].sceneName);
             }
 
             if(levelSelect == LevelSelect.DataMiner)
@@ -188,6 +194,9 @@ public class PlayerInteraction : MonoBehaviour
                         LevelManager.Instance.LoadAsyncScene(infosGame.dataMining[i].sceneName);
                     }
                 }
+
+                if(!alreadyLoaded)
+                LevelManager.Instance.LoadAsyncScene(infosGame.dataMining[infosGame.dataMining.Length -1].sceneName);
             }
         }
     }

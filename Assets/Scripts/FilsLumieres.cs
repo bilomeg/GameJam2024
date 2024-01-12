@@ -10,48 +10,52 @@ public class FilsLumieres : MonoBehaviour
     
     [SerializeField] private InfosGame _infosGame;
 
-    private Renderer _renderer; // Référence au composant Renderer de l'objet
+   
+     [SerializeField]private Renderer _dataMining;
+     [SerializeField]private Renderer _tower;
+     [SerializeField]private Renderer _spaceInvaders;
 
     void Start()
     {
-        // Assurez-vous que le composant Renderer est attaché à cet objet
-        _renderer = GetComponent<Renderer>();
-        if (_renderer == null)
+   
+        if (_infosGame != null)
         {
-            Debug.LogError("Le composant Renderer est manquant sur cet objet.");
+            ChangeMaterial(_infosGame.dataMining, _dataMining );
+            ChangeMaterial(_infosGame.towerDefense, _tower );
+            ChangeMaterial(_infosGame.spaceInvaders, _spaceInvaders );
+            // Vous pouvez ajouter des appels similaires pour les autres tableaux si nécessaire
         }
     }
 
     void Update()
     {
-        // Assurez-vous que InfosGame et les tableaux de niveaux correspondants ne sont pas nuls
-        if (_infosGame != null)
-        {
-            ChangeMaterial(_infosGame.towerDefense);
-            // Vous pouvez ajouter des appels similaires pour les autres tableaux si nécessaire
-        }
+       
     }
 
     // Fonction pour changer le matériau en fonction du tableau de niveaux
-    private void ChangeMaterial(InfosGame.Levels[] levels)
+    private void ChangeMaterial(InfosGame.Levels[] levels, Renderer _renderer)
     {
+        Debug.Log(levels.Length);
         // Assurez-vous que le composant Renderer est attaché
         if (_renderer != null && levels != null && levels.Length > 0)
         {
+            Debug.Log(levels[0].completed);
+            Debug.Log(2);
             // Exemple : Changez le matériau en fonction de la valeur de "completed" du premier niveau
-            if (levels[0].completed)
+            if (levels.Length > 0 && levels[0].completed)
             {
-                ChangeMaterial(glow1);
+                ChangeMaterial(glow1, _renderer);
+                Debug.Log("hum");
             }
             else
             {
-                ChangeMaterial(notGlow1);
+                ChangeMaterial(notGlow1, _renderer);
             }
         }
     }
 
     // Fonction pour changer le matériau
-    private void ChangeMaterial(Material newMaterial)
+    private void ChangeMaterial(Material newMaterial, Renderer _renderer)
     {
         // Assurez-vous que le composant Renderer est attaché
         if (_renderer != null)
