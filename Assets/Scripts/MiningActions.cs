@@ -21,6 +21,10 @@ public class MiningActions : MonoBehaviour
     [SerializeField] private InfosDataMining _infosDataMining;
     private int _nbPoints = 2;
         public Renderer Cube;
+
+    [SerializeField] private AudioSource _sonMiningHit;
+    [SerializeField] private AudioSource _sonMiningBreak;
+    [SerializeField] private AudioSource _sonCoin;
         void Start(){
 Cursor.lockState = CursorLockMode.None; 
         }
@@ -59,6 +63,7 @@ Cursor.lockState = CursorLockMode.None;
                             materials[1] = terre1;
                             // reassign the materials to the renderer
                             Cube.materials = materials;
+                            _sonMiningHit.Play();
                             Debug.Log(Cube.materials[0]);
                             Debug.Log(Cube.materials[1]);
                         }
@@ -70,10 +75,12 @@ Cursor.lockState = CursorLockMode.None;
                             materials[1] = terre2; 
                             // reassign the materials to the renderer
                             Cube.materials = materials;
+                            _sonMiningHit.Play();
                         }
                         else if (nombreClics == 3)
                         {
                             DetruireBloc(hit2.transform.gameObject);
+                            _sonMiningBreak.Play();
                         }
                     }
                       if (hit2.transform.CompareTag("BlocMinerai"))
@@ -88,6 +95,7 @@ Cursor.lockState = CursorLockMode.None;
                             materials[1] = minerai1;
                             // reassign the materials to the renderer
                             Cube.materials = materials;
+                            _sonMiningHit.Play();
                         }
                         else if (nombreClics == 2)
                         {
@@ -96,12 +104,13 @@ Cursor.lockState = CursorLockMode.None;
                             materials[1] = minerai2;
                             // reassign the materials to the renderer
                             Cube.materials = materials;
+                            _sonMiningHit.Play();
                         }
                         else if (nombreClics == 3)
                         {
                             DetruireBloc(hit2.transform.gameObject);
                             _infosDataMining._nbPoints += _nbPoints;
-                           
+                           _sonCoin.Play();
                         }
                     }
                     
