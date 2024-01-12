@@ -3250,7 +3250,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 91683086}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2028408375}
   m_SourcePrefab: {fileID: 100100000, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
 --- !u!1001 &1732826940
 PrefabInstance:
@@ -3649,6 +3653,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1649673949}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2028408374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544,
+    type: 3}
+  m_PrefabInstance: {fileID: 1649673949}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2028408375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028408374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796f839dd18d0714eae07a71c7da30cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelManager: {fileID: 8581260817706500894}
+  _dataMining: {fileID: 1427399872}
+  _tower: {fileID: 1858889347}
+  _spaceInvader: {fileID: 61153577}
 --- !u!1 &2058512867
 GameObject:
   m_ObjectHideFlags: 0
