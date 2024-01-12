@@ -220,6 +220,7 @@ public class TowerDefensePlayer : MonoBehaviour
                     else
                     {
                         currentMoney -= hologram.defenderCost;
+                        towerManager.RefreshUI();
                         sound.purchased.Play();
 
                         // Destroy Object
