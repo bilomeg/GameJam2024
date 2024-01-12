@@ -79,9 +79,6 @@ public class PlayerInteractor : MonoBehaviour
         // Call Functions
         if(interactingWith != null)
         interactingWith.Interact();
-
-        else
-        Debug.Log("Cant have shit in Detroit");
     }
 
     // ---------------------

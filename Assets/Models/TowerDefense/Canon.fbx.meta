@@ -3,7 +3,22 @@ guid: 6d60a15d20c61d247bff68ae9f40efc3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: base
+    second: {fileID: 2100000, guid: aa7fe84ef91a3e84a9810433f3cc8729, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: baseArme
+    second: {fileID: 2100000, guid: fd72098a6e127d448bcf4a170f780401, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: canon
+    second: {fileID: 2100000, guid: c9b8013999165fe4c97f3a1fb27f46db, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -101,14 +101,6 @@ public class TowerDefenseObjects : MonoBehaviour
     // Enemy Functions
     // ---------------------
 
-    private void FixedUpdate()
-    {
-        if(objectType == ObjectType.Enemy)
-        {
-
-        }
-    }
-
     public void LoseHealth(int damage)
     {
         // Set Variables

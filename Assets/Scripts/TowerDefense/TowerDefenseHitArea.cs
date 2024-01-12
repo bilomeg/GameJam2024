@@ -18,6 +18,10 @@ public class TowerDefenseHitArea : MonoBehaviour
 
         public string idle;
         public string shooting;
+        [Space(10)]
+
+        public GameObject shootParticle;
+        public Transform particleTransform;
     }
     // ---------------------
     // Variables
@@ -33,6 +37,8 @@ public class TowerDefenseHitArea : MonoBehaviour
     [SerializeField] GameObject rotateYGameObject;
     [SerializeField] Transform lookAt;
     [Space(5)]
+
+    [SerializeField] float xOffset;
 
     [SerializeField] AnimationInfo animationInfo;
 
@@ -91,12 +97,23 @@ public class TowerDefenseHitArea : MonoBehaviour
                 if(rotateYGameObject != null)
                 {
                     lookAt.LookAt(currentEnemy.transform.position);
-                    Vector3 newLookAtRot = new Vector3(0, lookAt.rotation.y);
-
-                    rotateYGameObject.transform.DORotateQuaternion(Quaternion.Euler(newLookAtRot), defender.fireRate).SetEase(Ease.InOutCirc);
+                    Vector3 newRot = new Vector3(lookAt.localRotation.eulerAngles.y, 90, 90);
+                    rotateYGameObject.transform.DOLocalRotateQuaternion(Quaternion.Euler(newRot), defender.fireRate).SetEase(Ease.InOutCirc);
                 }
 
                 yield return new WaitForSeconds(defender.fireRate);
+
+                // Particles
+                if(animationInfo.shootParticle != null)
+                {
+                    var instance = Instantiate(animationInfo.shootParticle, animationInfo.particleTransform);
+                    instance.name = animationInfo.shootParticle.name;
+                    instance.transform.parent = null;
+                }
+
+                // Audio
+                if(GetComponent<AudioSource>() != null)
+                GetComponent<AudioSource>().Play();
 
                 // Set Variables
                 shooting = false;

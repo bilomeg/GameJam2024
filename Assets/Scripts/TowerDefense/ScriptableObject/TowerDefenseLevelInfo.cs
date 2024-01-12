@@ -48,7 +48,6 @@ public class TowerDefenseLevelInfo : ScriptableObject
     [Space(5)]
 
     public int moneyAtStart;
-    public int moneyPerSeconds;
     [Space(10)]
 
     public EnemyWave[] enemyWaves;
