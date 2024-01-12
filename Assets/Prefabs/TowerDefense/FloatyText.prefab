@@ -69,8 +69,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: '- 00000'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 777b672d4d7d528438ad5688fa4d2b01, type: 2}
+  m_sharedMaterial: {fileID: -5058141252059207489, guid: 777b672d4d7d528438ad5688fa4d2b01,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -182,7 +183,7 @@ RectTransform:
   m_Children:
   - {fileID: 8673326108122648766}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &854074092030913780
 MonoBehaviour:
   m_ObjectHideFlags: 0
