@@ -14,6 +14,7 @@ public class DetruireProjectile : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.up * Time.deltaTime * 3.0f);
+        
     }
 
     private void OnTriggerEnter(Collider other)
