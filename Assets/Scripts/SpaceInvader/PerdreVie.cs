@@ -6,6 +6,9 @@ public class PerdreVie : MonoBehaviour
 {
     [SerializeField] private AfficherVie scriptVie;
 
+    [SerializeField] private AudioSource _sonDamage;
+    [SerializeField] private AudioSource _sonGameOver;
+
 
     // Start is called before the first frame update
     void Start()
@@ -13,18 +16,12 @@ public class PerdreVie : MonoBehaviour
         scriptVie.GetComponent<AfficherVie>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
        
         if(other.tag == "Player"){
             Vie(other.gameObject);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
 
         }
 
@@ -36,14 +33,19 @@ public class PerdreVie : MonoBehaviour
     private void Vie(GameObject player){
         if(scriptVie.nombreVie > 0){
             scriptVie.nombreVie--;
-            Debug.Log(scriptVie.nombreVie);
+            _sonDamage.Play();
         }
 
         if(scriptVie.nombreVie <=0){
             scriptVie.nombreVie = 0;
             Debug.Log("Vaisseau mort");
+            _sonGameOver.Play();
             Destroy(player);
-            LevelManager.Instance.LoadAsyncScene("SceneSallePrincipale");
+            Invoke("ChangementScene", 2.0f);
         }
+    }
+
+    private void ChangementScene(){
+        LevelManager.Instance.LoadAsyncScene("SceneSallePrincipale");
     }
 }
