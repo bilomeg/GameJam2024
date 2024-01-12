@@ -41,11 +41,11 @@ public class FilsLumieres : MonoBehaviour
             // Exemple : Changez le matériau en fonction de la valeur de "completed" du premier niveau
             if (levels[0].completed)
             {
-                ChangeMaterial(notGlow1);
+                ChangeMaterial(glow1);
             }
             else
             {
-                ChangeMaterial(glow1);
+                ChangeMaterial(notGlow1);
             }
         }
     }
