@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Victoire : MonoBehaviour
 {
-    public int nbDePoint = 0;
     private GameObject[] nbEnnemie;
 
+    private bool ennemieEnVie = true;
+
     [SerializeField] private InfosGame infoGame;
+    [SerializeField] private AudioSource _sonVictoire;
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +23,16 @@ public class Victoire : MonoBehaviour
     {
         nbEnnemie = GameObject.FindGameObjectsWithTag("Ennemie");
 
-        if(nbEnnemie.Length == 0){
+        if(nbEnnemie.Length == 0 && ennemieEnVie){
+            ennemieEnVie = false;
             Debug.Log("victoire");
+            _sonVictoire.Play();
             infoGame.spaceInvaders[0].completed = true;
-            LevelManager.Instance.LoadAsyncScene("SceneSallePrincipale");
+            Invoke("ChangementScene", 3.0f);
         }
+    }
+
+    private void ChangementScene(){
+        LevelManager.Instance.LoadAsyncScene("SceneSallePrincipale");
     }
 }
