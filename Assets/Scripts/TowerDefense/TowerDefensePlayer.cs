@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using UnityEngine;
+using Unity.VisualScripting;
 
 
 public class TowerDefensePlayer : MonoBehaviour
@@ -10,6 +11,26 @@ public class TowerDefensePlayer : MonoBehaviour
     // ---------------------
     // Class
     // ---------------------
+
+    [System.Serializable]
+    public class Sound
+    {
+        public AudioSource confirmed;
+        public AudioSource denied;
+        public AudioSource purchased;
+        public AudioSource hover;
+        public AudioSource hologram;
+    }
+
+    [System.Serializable]
+    public class AnimationInfo
+    {
+        public Animator animator;
+        [Space(5)]
+
+        public string idle;
+        public string hover;
+    }
 
     [System.Serializable]
     public class CameraInfo
@@ -27,6 +48,8 @@ public class TowerDefensePlayer : MonoBehaviour
 
     [HideInInspector] public TowerDefenseLevelInfo levelInfo;
     [HideInInspector] public TowerDefenseManager towerManager;
+    [SerializeField] GameObject defaultDefender;
+    [SerializeField] Sound sound;
 
     [Header("Player's Info")]
     public int currentMoney;
@@ -42,8 +65,10 @@ public class TowerDefensePlayer : MonoBehaviour
 
     [Header("Movement's Information")]
     [SerializeField] float moveSpeed;
+    [SerializeField] AnimationInfo animationInfo;
 
     // Player Input
+    
     PlayerInput playerInput;
     Vector2 moveInput;
     bool selectingObject;
@@ -123,30 +148,15 @@ public class TowerDefensePlayer : MonoBehaviour
     {
         // Set Variables
         hovering = defenseObject;
-        Debug.Log(hovering);
-
-        // --------------------------------------------
-        // Add Hover Effect or Display Information Text 
-        // --------------------------------------------
-
-        Renderer objectRenderer = defenseObject.transform.gameObject.GetComponent<Renderer>();
-        defaultColor = objectRenderer.material.color;
-
-        objectRenderer.material.DOColor(hoverColor, hoverTransitionTime).SetEase(Ease.InOutCirc);
+        animationInfo.animator.SetTrigger(animationInfo.hover);
+        sound.hover.Play();
     }
 
     void StopHovering()
     {
-        // --------------------------------------
-        // Remove Hover Effect or Informaion Text
-        // --------------------------------------
-
-        Renderer objectRenderer = hovering.transform.gameObject.GetComponent<Renderer>();
-        objectRenderer.material.DOColor(defaultColor, hoverTransitionTime).SetEase(Ease.InOutCirc);
-
         // Set Variables
         hovering = null;
-        Debug.Log(hovering);
+        animationInfo.animator.SetTrigger(animationInfo.idle);
     }
 
     void SelectCurrentObject()
@@ -171,6 +181,8 @@ public class TowerDefensePlayer : MonoBehaviour
             // Set Variables
             selectingObject = true;
             StopHovering();
+
+            sound.hologram.Play();
         }
 
         else if(selectingObject)
@@ -189,27 +201,29 @@ public class TowerDefensePlayer : MonoBehaviour
                 var instance = Instantiate(hologram.defenderGameObject, newPos, hologram.defenderGameObject.transform.rotation);
                 instance.name = hologram.defenderGameObject.name;
 
-                instance.GetComponent<Renderer>().material.color = defaultColor;
-
                 // If Defender isn't in Hierachy Purchase Defender
                 if(hologram.defenderGameObject.activeInHierarchy)
                 {
+                    sound.confirmed.Play();
                     Destroy(hologram.defenderGameObject);
                     Destroy(hologram.transform.gameObject);
                 }
-
                 else
                 {
                     if(currentMoney < hologram.defenderCost)
-                    Destroy(hologram.transform.gameObject);
+                    {
+                        sound.denied.Play();
+                        Destroy(instance);
+                        Destroy(hologram.transform.gameObject);
+                    }
 
                     else
                     {
+                        currentMoney -= hologram.defenderCost;
+                        sound.purchased.Play();
+
                         // Destroy Object
                         Destroy(hologram.transform.gameObject);
-
-                        // Remove Camera from Player
-                        cameraInfo.cameraObject.transform.parent = null;
                     }
                 }
 
@@ -237,6 +251,9 @@ public class TowerDefensePlayer : MonoBehaviour
             // Destroy Object
             Destroy(hologram.transform.gameObject);
 
+            // Play Audio
+            sound.denied.Play();
+
             // Remove Camera from Player
             cameraInfo.cameraObject.transform.parent = null;
         }
@@ -245,12 +262,12 @@ public class TowerDefensePlayer : MonoBehaviour
         Debug.Log("Nothing is currently selected");
     }
 
-    public void PurchaseDefender(TowerDefenseObjects defenderPrefab)
+    public void PurchaseDefender(GameObject defenderPrefab)
     {
         if(hovering != null)
         StopHovering();
 
-        hovering = defenderPrefab;
+        hovering = defenderPrefab.GetComponent<TowerDefenseObjects>();
         SelectCurrentObject();
     }
 
@@ -284,14 +301,10 @@ public class TowerDefensePlayer : MonoBehaviour
         SelectCurrentObject();
     }
 
-    public void OnSell()
-    {
-        
-    }
-
     public void OnOpenMenu()
     {
-
+        if(!selectingObject && hovering == null)
+        PurchaseDefender(defaultDefender);
     }
 
     public void OnCancel()
