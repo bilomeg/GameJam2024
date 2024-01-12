@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerDefense:
   - sceneName: Tower Defense
-    completed: 1
+    completed: 0
   spaceInvaders:
   - sceneName: SceneSpaceInvader
-    completed: 1
+    completed: 0
   dataMining:
   - sceneName: SceneDataMining
-    completed: 1
+    completed: 0
