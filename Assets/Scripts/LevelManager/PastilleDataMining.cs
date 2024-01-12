@@ -20,7 +20,8 @@ public class PastilleDataMining : MonoBehaviour
     _canvasToucheE.SetActive(true);
  }
 
- private void OnOpen( ){
+public void OnOpen(){
     _levelManager.LoadAsyncScene("SceneDataMining");
+    Debug.Log("PL");
  }
 }

@@ -10,9 +10,10 @@ public class LevelManager : MonoBehaviour
      public static  LevelManager Instance; 
 
     [SerializeField] private GameObject _loaderCanvas;
+   
     [SerializeField] private Image _barreProgression;
     
- private void Awake()
+ private void Awake() 
     {
         if(Instance == null){
             Instance  = this;
@@ -47,6 +48,7 @@ public class LevelManager : MonoBehaviour
         sceneLoad.allowSceneActivation = true;
         //_loaderCanvas.SetActive(false);
     }
+
 public enum Scene{
         SceneIntro,
         SceneSallePrincipale,
