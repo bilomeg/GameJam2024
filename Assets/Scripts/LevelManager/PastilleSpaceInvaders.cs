@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PastilleSpaceInvaders : MonoBehaviour
 {
+    [SerializeField] private GameObject _canvasToucheE;
     private LevelManager _levelManager;
     // Start is called before the first frame update
     void Start()
@@ -15,5 +16,6 @@ public class PastilleSpaceInvaders : MonoBehaviour
      private void OnTriggerEnter(Collider other)
  {
     _levelManager.LoadAsyncScene("SceneSpaceInvader");
+    // _canvasToucheE.SetActive(true);
  }
 }

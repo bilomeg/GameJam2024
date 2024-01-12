@@ -11,6 +11,13 @@ public class TowerDefenseLevelInfo : ScriptableObject
     // ---------------------
 
     [System.Serializable]
+    public class SpawnLocation
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+    }
+
+    [System.Serializable]
     public class LevelLimit
     {
         public Vector2 minPos;
@@ -22,12 +29,12 @@ public class TowerDefenseLevelInfo : ScriptableObject
     {
         [Header("Wave Information")]
         public GameObject enemiesPrefab;
-        public Vector3 spawnLocation;
+        public SpawnLocation spawnLocation;
         public int numberToSpawn;
         [Space(5)]
 
-        public float timeAfterPreviousWave;
         public float timeBetweenSpawn;
+        public float timeBetweenWave;
     }
 
     // ---------------------
@@ -41,7 +48,6 @@ public class TowerDefenseLevelInfo : ScriptableObject
     [Space(5)]
 
     public int moneyAtStart;
-    public int moneyPerSeconds;
     [Space(10)]
 
     public EnemyWave[] enemyWaves;

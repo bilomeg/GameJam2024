@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 using DG.Tweening;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class TowerDefenseObjects : MonoBehaviour
 {
@@ -24,8 +25,8 @@ public class TowerDefenseObjects : MonoBehaviour
     // Variables
     // ---------------------
 
-    [HideInInspector]
-    public TowerDefenseManager towerManager;
+    [HideInInspector] public TowerDefenseManager towerManager;
+    [HideInInspector] public TowerDefenseLevelInfo levelInfo;
 
     public ObjectType objectType;
 
@@ -55,14 +56,11 @@ public class TowerDefenseObjects : MonoBehaviour
     [Header("Enemy Info")]
     
     [SerializeField] int health;
-    [SerializeField] GameObject floatyText;
-    [SerializeField] float speed;
-    TowerDefenseLevelInfo levelInfo;
+    public NavMeshAgent navMesh;
+    public float speed;
     [Space(5)]
 
-    [SerializeField] float tempMinPos;
-    [SerializeField] float tempMaxPos;
-
+    [SerializeField] GameObject floatyText;
     public int givenScoreAtDeath;
     public int givenMoneyAtDeath;
 
@@ -96,24 +94,12 @@ public class TowerDefenseObjects : MonoBehaviour
         // Enemy
         if(objectType == ObjectType.Enemy)
         {
-            transform.DOMoveX(tempMaxPos, 5);
+
         }
     }
 
     // Enemy Functions
     // ---------------------
-
-    private void FixedUpdate()
-    {
-        if(objectType == ObjectType.Enemy)
-        {
-            if(transform.position.x == tempMinPos)
-            transform.DOMoveX(tempMaxPos, 5);
-
-            if(transform.position.x == tempMaxPos)
-            transform.DOMoveX(tempMinPos, 5);
-        }
-    }
 
     public void LoseHealth(int damage)
     {
@@ -133,7 +119,7 @@ public class TowerDefenseObjects : MonoBehaviour
         Death();
     }
 
-    void Death()
+    public void Death()
     {
         // Set Variables
         TowerDefensePlayer player = GameObject.Find("Player").GetComponent<TowerDefensePlayer>();
@@ -142,7 +128,39 @@ public class TowerDefenseObjects : MonoBehaviour
 
         // Destroy Object
         // Spawn Particles
-        //towerManager.numberOfEnemy--;
+
+        towerManager.CheckIfEnd();
+        Destroy(gameObject);
+    }
+
+    // Tower Functions
+    // ---------------------
+
+    void DamageTower(int damage)
+    {
+        // Set Variables
+        health -= damage;
+        
+        // Display Damage
+        if(floatyText != null)
+        {
+            var instance = Instantiate(floatyText, transform.position, floatyText.transform.rotation);
+            TextMeshProUGUI text = instance.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            text.text = "- " + damage;
+        }
+
+        if(health <= 0)
+        TowerDestroyed();
+    }
+
+    void TowerDestroyed()
+    {
+        // Show Particle
+
+        // Call Functions
+        towerManager.MissionFailed();
+
+        // Destroy GameObject
         Destroy(gameObject);
     }
 
@@ -167,7 +185,20 @@ public class TowerDefenseObjects : MonoBehaviour
                     }
                 }
             }
-        }        
+        }    
+
+        if(objectType == ObjectType.Tower)
+        {
+            if(other.GetComponent<TowerDefenseObjects>() != null)
+            {
+                TowerDefenseObjects otherObject = other.GetComponent<TowerDefenseObjects>();
+                if(otherObject.objectType == ObjectType.Enemy)
+                {
+                    DamageTower(otherObject.damage);
+                    otherObject.Death();
+                }
+            }
+        }    
     }
 
     void OnTriggerExit(Collider other)

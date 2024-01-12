@@ -8,6 +8,8 @@ public class VictoireMining : MonoBehaviour
     [SerializeField] private InfosGame infosGame;
     private LevelManager _levelManager;
 
+    private bool objectifAtteint = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +20,13 @@ public class VictoireMining : MonoBehaviour
     void Update()
     {
         if(infosDataMining._tempsEcoule <= 0){
-            if(infosDataMining._nbPoints >= 15){
+            if(infosDataMining._nbPoints >= 16 && objectifAtteint){
+                objectifAtteint = false;
                 Debug.Log("Victoire");
                 _levelManager.LoadAsyncScene("SceneSallePrincipale");
                 infosGame.dataMining[0].completed = true;
             }
-            else{
+            if(infosDataMining._nbPoints < 16){
                 Debug.Log("Defaite");
                 infosGame.dataMining[0].completed = false;
                 _levelManager.LoadAsyncScene("SceneSallePrincipale");

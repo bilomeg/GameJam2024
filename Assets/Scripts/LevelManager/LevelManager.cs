@@ -10,9 +10,10 @@ public class LevelManager : MonoBehaviour
      public static  LevelManager Instance; 
 
     [SerializeField] private GameObject _loaderCanvas;
+   
     [SerializeField] private Image _barreProgression;
     
- private void Awake()
+ private void Awake() 
     {
         if(Instance == null){
             Instance  = this;
@@ -31,12 +32,12 @@ public class LevelManager : MonoBehaviour
     public async void LoadAsyncScene(string sceneName)
     {
         var sceneLoad = SceneManager.LoadSceneAsync(sceneName);
-        //sceneLoad.allowSceneActivation = false;
+        sceneLoad.allowSceneActivation = false;
 
-        //_loaderCanvas.SetActive(true);
+        _loaderCanvas.SetActive(true);
           
         do {
-            await Task.Delay(40000);
+            await Task.Delay(1000);
             if(_barreProgression != null){
                 _barreProgression.fillAmount = sceneLoad.progress;  
             }
@@ -45,8 +46,9 @@ public class LevelManager : MonoBehaviour
         
 
         sceneLoad.allowSceneActivation = true;
-        //_loaderCanvas.SetActive(false);
+        _loaderCanvas.SetActive(false);
     }
+
 public enum Scene{
         SceneIntro,
         SceneSallePrincipale,

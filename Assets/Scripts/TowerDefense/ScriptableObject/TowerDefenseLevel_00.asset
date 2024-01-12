@@ -13,10 +13,49 @@ MonoBehaviour:
   m_Name: TowerDefenseLevel_00
   m_EditorClassIdentifier: 
   levelLimit:
-    minPos: {x: -10, y: -15}
-    maxPos: {x: 10, y: 15}
-  floorLevel: 0.5
-  destination: {x: 0, y: 0, z: 0}
-  moneyAtStart: 0
-  moneyPerSeconds: 0
-  enemyWaves: []
+    minPos: {x: -15, y: -10}
+    maxPos: {x: 15, y: 10}
+  floorLevel: 0.75
+  destination: {x: 9.75, y: 0.75, z: -5.75}
+  moneyAtStart: 30
+  enemyWaves:
+  - enemiesPrefab: {fileID: 4358032180554144331, guid: 5a2982a39095407418a584cd9c373784,
+      type: 3}
+    spawnLocation:
+      position: {x: -10.25, y: 0, z: -5.75}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+    numberToSpawn: 3
+    timeBetweenSpawn: 2.5
+    timeBetweenWave: 3
+  - enemiesPrefab: {fileID: 4358032180554144331, guid: 5a2982a39095407418a584cd9c373784,
+      type: 3}
+    spawnLocation:
+      position: {x: -10.25, y: 0, z: -5.75}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+    numberToSpawn: 5
+    timeBetweenSpawn: 2.5
+    timeBetweenWave: 15
+  - enemiesPrefab: {fileID: 4358032180554144331, guid: 26be9ad67f98bdd4d8f5f244ff388427,
+      type: 3}
+    spawnLocation:
+      position: {x: -5, y: 0, z: 5.25}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+    numberToSpawn: 2
+    timeBetweenSpawn: 3.5
+    timeBetweenWave: 15
+  - enemiesPrefab: {fileID: 4358032180554144331, guid: 5a2982a39095407418a584cd9c373784,
+      type: 3}
+    spawnLocation:
+      position: {x: -5, y: 0, z: 5.25}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+    numberToSpawn: 8
+    timeBetweenSpawn: 2.5
+    timeBetweenWave: 15
+  - enemiesPrefab: {fileID: 4358032180554144331, guid: 26be9ad67f98bdd4d8f5f244ff388427,
+      type: 3}
+    spawnLocation:
+      position: {x: -10.25, y: 0, z: -5.75}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+    numberToSpawn: 4
+    timeBetweenSpawn: 3.5
+    timeBetweenWave: 15

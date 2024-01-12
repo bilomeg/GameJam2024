@@ -43,6 +43,6 @@ Material:
     m_Floats:
     - _QueueControl: 0
     m_Colors:
-    - _Fresnel_Color: {r: 7.129739, g: 7.129739, b: 7.129739, a: 0}
+    - _Fresnel_Color: {r: 12.708291, g: 12.708291, b: 12.708291, a: 0}
     - _Main_Color: {r: 3.5648696, g: 3.5648696, b: 3.5648696, a: 0}
   m_BuildTextureStacks: []

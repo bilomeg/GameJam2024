@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TowerDefenseHitArea : MonoBehaviour
@@ -17,6 +18,10 @@ public class TowerDefenseHitArea : MonoBehaviour
 
         public string idle;
         public string shooting;
+        [Space(10)]
+
+        public GameObject shootParticle;
+        public Transform particleTransform;
     }
     // ---------------------
     // Variables
@@ -32,6 +37,8 @@ public class TowerDefenseHitArea : MonoBehaviour
     [SerializeField] GameObject rotateYGameObject;
     [SerializeField] Transform lookAt;
     [Space(5)]
+
+    [SerializeField] float xOffset;
 
     [SerializeField] AnimationInfo animationInfo;
 
@@ -90,12 +97,23 @@ public class TowerDefenseHitArea : MonoBehaviour
                 if(rotateYGameObject != null)
                 {
                     lookAt.LookAt(currentEnemy.transform.position);
-                    Vector3 newLookAtRot = new Vector3(0, lookAt.rotation.y);
-
-                    rotateYGameObject.transform.DORotateQuaternion(Quaternion.Euler(newLookAtRot), defender.fireRate).SetEase(Ease.InOutCirc);
+                    Vector3 newRot = new Vector3(lookAt.localRotation.eulerAngles.y, 90, 90);
+                    rotateYGameObject.transform.DOLocalRotateQuaternion(Quaternion.Euler(newRot), defender.fireRate).SetEase(Ease.InOutCirc);
                 }
 
                 yield return new WaitForSeconds(defender.fireRate);
+
+                // Particles
+                if(animationInfo.shootParticle != null)
+                {
+                    var instance = Instantiate(animationInfo.shootParticle, animationInfo.particleTransform);
+                    instance.name = animationInfo.shootParticle.name;
+                    instance.transform.parent = null;
+                }
+
+                // Audio
+                if(GetComponent<AudioSource>() != null)
+                GetComponent<AudioSource>().Play();
 
                 // Set Variables
                 shooting = false;
@@ -104,6 +122,20 @@ public class TowerDefenseHitArea : MonoBehaviour
                 if(currentEnemy != null)
                 currentEnemy.GetComponent<TowerDefenseObjects>().LoseHealth(defender.damage);
                 StartCoroutine("Shoot");
+            }
+
+            else
+            {
+                bool hasOtherInside = false;
+                for(int i = 0;i < collidingObjects.Length;i++)
+                if(collidingObjects[i] != null)
+                hasOtherInside = true;
+
+                if(hasOtherInside)
+                {
+                    SpliceCollidingAray(0);
+                    StartCoroutine("Shoot");
+                }
             }
 
         }
@@ -116,18 +148,14 @@ public class TowerDefenseHitArea : MonoBehaviour
     {
         if(other.GetComponent<TowerDefenseObjects>() != null)
         {
-            Debug.Log("are u even called?");
             TowerDefenseObjects otherObject = other.GetComponent<TowerDefenseObjects>();
             if(otherObject.objectType == TowerDefenseObjects.ObjectType.Enemy)
             {
-                Debug.Log("are u even called? 2");
                 bool alreadyImplemented = false;
                 for(int i = 0;i < collidingObjects.Length;i++)
                 {
-                    Debug.Log("are u even called? 3");
                     if(!alreadyImplemented && collidingObjects[i] == null)
                     {
-                        Debug.Log("are u even called? 4");
                         alreadyImplemented = true;
                         collidingObjects[i] = other.gameObject;
 
