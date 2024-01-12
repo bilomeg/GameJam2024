@@ -19,6 +19,9 @@ public class MiningActions : MonoBehaviour
     [SerializeField] private InfosDataMining _infosDataMining;
     private int _nbPoints = 2;
         public Renderer Cube;
+        void Start(){
+Cursor.lockState = CursorLockMode.None; 
+        }
     private void Update()
     {
         if(Input.GetMouseButtonDown(0)){
