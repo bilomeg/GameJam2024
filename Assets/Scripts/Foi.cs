@@ -19,6 +19,16 @@ public class Foi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(infosGame.dataMining[0].completed){
+            foi1.SetActive(true);
+        }
+
+        if(infosGame.spaceInvaders[0].completed){
+            foi2.SetActive(true);
+        }
+
+        if(infosGame.towerDefense[0].completed){
+            foi3.SetActive(true);
+        }
     }
 }
