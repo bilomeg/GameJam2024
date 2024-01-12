@@ -7,7 +7,7 @@ public class ChangementSceneAccueil : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("ChangementScene", 5.0f);
+        Invoke("ChangementScene", 3.0f);
     }
 
     // Update is called once per frame
