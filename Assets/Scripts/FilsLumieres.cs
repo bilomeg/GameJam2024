@@ -7,7 +7,9 @@ public class FilsLumieres : MonoBehaviour
     [SerializeField] private Material notGlow1;
     [SerializeField] private Material glow1;
    
-    
+    [SerializeField] private GameObject erudis1;
+    [SerializeField] private GameObject erudis2;
+    [SerializeField] private GameObject erudis3;
     [SerializeField] private InfosGame _infosGame;
 
    
@@ -29,7 +31,15 @@ public class FilsLumieres : MonoBehaviour
 
     void Update()
     {
-       
+    if(_infosGame.dataMining[0].completed){
+        erudis1.SetActive(true);
+    }
+    if(_infosGame.spaceInvaders[0].completed){
+        erudis2.SetActive(true);
+    }
+    if(_infosGame.towerDefense[0].completed){
+        erudis3.SetActive(true);
+    }
     }
 
     // Fonction pour changer le matériau en fonction du tableau de niveaux
