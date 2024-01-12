@@ -26,7 +26,7 @@ public class VictoireMining : MonoBehaviour
                 _levelManager.LoadAsyncScene("SceneSallePrincipale");
                 infosGame.dataMining[0].completed = true;
             }
-            else{
+            if(infosDataMining._nbPoints < 16){
                 Debug.Log("Defaite");
                 infosGame.dataMining[0].completed = false;
                 _levelManager.LoadAsyncScene("SceneSallePrincipale");
