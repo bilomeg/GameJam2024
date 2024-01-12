@@ -9,6 +9,7 @@ TagManager:
   - BlocMinerai
   - Ennemie
   - Projectile
+  - Plafond
   layers:
   - Default
   - TransparentFX

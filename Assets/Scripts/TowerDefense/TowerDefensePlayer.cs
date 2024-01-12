@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using UnityEngine;
-using TreeEditor;
+
 
 public class TowerDefensePlayer : MonoBehaviour
 {
@@ -25,9 +25,14 @@ public class TowerDefensePlayer : MonoBehaviour
     // Variables
     // ---------------------
 
-    public TowerDefenseLevelInfo levelInfo;
+    [HideInInspector] public TowerDefenseLevelInfo levelInfo;
+    [HideInInspector] public TowerDefenseManager towerManager;
 
     [Header("Player's Info")]
+    public int currentMoney;
+    public int currentScore;
+    [Space(5)]
+    
     [SerializeField] CameraInfo cameraInfo;
     [Space(5)]
 
@@ -39,6 +44,7 @@ public class TowerDefensePlayer : MonoBehaviour
     [SerializeField] float moveSpeed;
 
     // Player Input
+    PlayerInput playerInput;
     Vector2 moveInput;
     bool selectingObject;
     bool isUIOpen;
@@ -58,6 +64,7 @@ public class TowerDefensePlayer : MonoBehaviour
     void Start()
     {
         // Set Variables
+        playerInput = GetComponent<PlayerInput>();
         if(cameraInfo.cameraObject == null) cameraInfo.cameraObject = GameObject.Find("Main Camera");
     }
 
@@ -104,13 +111,9 @@ public class TowerDefensePlayer : MonoBehaviour
 
     void MoveCameraToPlayer()
     {
-        if(!selectingObject)
-        {
-            // Move Camera To Player with DOTween
-            Vector3 newPos = transform.position + cameraInfo.cameraOffset;
-            cameraInfo.cameraObject.transform.DOMove(newPos, cameraInfo.transitionTime).SetEase(Ease.InOutCirc);
-        }
-        
+        // Move Camera To Player with DOTween
+        Vector3 newPos = transform.position + cameraInfo.cameraOffset;
+        cameraInfo.cameraObject.transform.DOMove(newPos, cameraInfo.transitionTime).SetEase(Ease.InOutCirc);
     }
 
     // Defender Functions
@@ -150,6 +153,9 @@ public class TowerDefensePlayer : MonoBehaviour
     {
         if(hovering != null && !selectingObject)
         {
+            // Call Functions
+            MoveCameraToPlayer();
+
             // Instantiate
             var instance = Instantiate(hovering.defenderHologram, transform.position, hovering.defenderHologram.transform.rotation);
             instance.name = "Hologram";
@@ -157,6 +163,10 @@ public class TowerDefensePlayer : MonoBehaviour
 
             hologram = instance.GetComponent<TowerDefenseObjects>();
             hologram.defenderGameObject = hovering.transform.gameObject;
+
+            // Set Camera To Player
+            cameraInfo.cameraObject.transform.SetParent(gameObject.transform);
+            cameraInfo.cameraObject.transform.DOLocalMove(cameraInfo.cameraOffset, cameraInfo.transitionTime);
 
             // Set Variables
             selectingObject = true;
@@ -181,11 +191,33 @@ public class TowerDefensePlayer : MonoBehaviour
 
                 instance.GetComponent<Renderer>().material.color = defaultColor;
 
-                Destroy(hologram.defenderGameObject);
-                Destroy(hologram.transform.gameObject);
+                // If Defender isn't in Hierachy Purchase Defender
+                if(hologram.defenderGameObject.activeInHierarchy)
+                {
+                    Destroy(hologram.defenderGameObject);
+                    Destroy(hologram.transform.gameObject);
+                }
+
+                else
+                {
+                    if(currentMoney < hologram.defenderCost)
+                    Destroy(hologram.transform.gameObject);
+
+                    else
+                    {
+                        // Destroy Object
+                        Destroy(hologram.transform.gameObject);
+
+                        // Remove Camera from Player
+                        cameraInfo.cameraObject.transform.parent = null;
+                    }
+                }
 
                 // Set Variables
                 selectingObject = false;
+
+                // Remove Camera from Player
+                cameraInfo.cameraObject.transform.parent = null;
             }
 
             else
@@ -193,6 +225,33 @@ public class TowerDefensePlayer : MonoBehaviour
                 Debug.Log("Can't be placed");
             }
         }
+    }
+
+    void CancelCurrentObject()
+    {
+        if(selectingObject)
+        {
+            // Set Variables
+            selectingObject = false;
+
+            // Destroy Object
+            Destroy(hologram.transform.gameObject);
+
+            // Remove Camera from Player
+            cameraInfo.cameraObject.transform.parent = null;
+        }
+
+        else
+        Debug.Log("Nothing is currently selected");
+    }
+
+    public void PurchaseDefender(TowerDefenseObjects defenderPrefab)
+    {
+        if(hovering != null)
+        StopHovering();
+
+        hovering = defenderPrefab;
+        SelectCurrentObject();
     }
 
     // ---------------------
@@ -208,12 +267,15 @@ public class TowerDefensePlayer : MonoBehaviour
     public void OnMoveCamera()
     {
         // Call Functions
+        if(!selectingObject)
         MoveCameraToPlayer();
     }
 
     public void OnStartMission()
     {
-
+        // Call Functions
+        if(!towerManager.started)
+        towerManager.StartMission();
     }
 
     public void OnSelect()
@@ -234,7 +296,7 @@ public class TowerDefensePlayer : MonoBehaviour
 
     public void OnCancel()
     {
-
+        CancelCurrentObject();
     }
 
     // ---------------------

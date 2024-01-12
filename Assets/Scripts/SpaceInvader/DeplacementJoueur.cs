@@ -12,19 +12,28 @@ public class DeplacementJoueur : MonoBehaviour
     //Pour le shoot
     [SerializeField] private GameObject projectile;
     [SerializeField] private float vitesseProjectile = 3.0f;
-    private List<GameObject> projectilesEnMouvement = new List<GameObject>();
+    private bool canShoot = true;
+    [SerializeField] private float intervalShoot;
+
+    //Pour l'animation de tournant
+    [SerializeField] private Animator animateur;
+    [SerializeField] private GameObject vaisseau;
+    Quaternion vaisseauRotation;
 
     // Start is called before the first frame update
     void Start()
     {
+        vaisseauRotation = vaisseau.transform.rotation;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        BougeProjectiles();
+        //BougeProjectiles();
         Bouge();
+
+        Debug.Log(mouvementHorizontal);
     }
 
     public void OnMove(InputValue value)
@@ -36,28 +45,21 @@ public class DeplacementJoueur : MonoBehaviour
 
     public void OnShoot(InputValue value)
     {
-        GameObject nouveauProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
-        projectilesEnMouvement.Add(nouveauProjectile);
+        if(canShoot){
+            Instantiate(projectile, transform.position, Quaternion.identity);
+            canShoot = false;
+            Invoke("IntervalShoot", intervalShoot);
+        }
     }
 
     void Bouge(){
         transform.Translate(Vector3.forward * Time.deltaTime * vitesse * mouvementHorizontal);
+        Quaternion newRotation = Quaternion.Euler(new Vector3(vaisseauRotation.x,25 * mouvementHorizontal, -90));
+        vaisseau.transform.localRotation = newRotation;
     }
 
-    void BougeProjectiles()
-    {
-        for (int i = 0; i < projectilesEnMouvement.Count; i++)
-        {
-            if (projectilesEnMouvement[i] != null)
-            {
-                projectilesEnMouvement[i].transform.Translate(Vector3.up * Time.deltaTime * vitesseProjectile);
-            }
-            else
-            {
-                // Retirer le projectile s'il a été détruit
-                projectilesEnMouvement.RemoveAt(i);
-                i--;
-            }
-        }
+    private void IntervalShoot(){
+        canShoot = true;
     }
+
 }

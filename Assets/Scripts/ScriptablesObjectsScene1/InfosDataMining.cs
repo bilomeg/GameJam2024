@@ -10,6 +10,7 @@ public class InfosDataMining : ScriptableObject
    [SerializeField] public float _tempsEcoule;
    [SerializeField] public float _nbPoints;
    
+   
    public void init(){
     _tempsEcoule = _tempsDeJeu;
  

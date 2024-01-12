@@ -8,7 +8,7 @@ public class TimerDataMining : MonoBehaviour
 {
     // Start is called before the first frame update
      //Référence au texte du timer
-    [SerializeField] private TMP_Text _tempsTexte;
+    [SerializeField] private Text _tempsTexte;
     //Variable qui affichera le temps 
   private bool _tempsJeuFini = false;
 
