@@ -2,13 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using DG.Tweening;
 using UnityEngine;
+using TMPro;
 
 public class TowerDefenseManager : MonoBehaviour
 {
     // ---------------------
     // Class
     // ---------------------
+
+    [System.Serializable]
+    public class UIReference
+    {
+        public CanvasGroup startBtn;
+        [Space(5)]
+        public TextMeshProUGUI vagueText;
+        [Space(5)]
+
+        public TextMeshProUGUI moneyText;
+        public string moneyString;
+        [Space(5)]
+
+        public float timeDuration;
+    }
 
     // ---------------------
     // Variables
@@ -20,6 +37,8 @@ public class TowerDefenseManager : MonoBehaviour
     int numberOfEnemy;
     int enemyWaveIndex;
     [HideInInspector] public bool started;
+
+    [SerializeField] UIReference uiReference;
 
     [Header("Level Manager")]
     [SerializeField] TowerDefenseLevelInfo levelInfo;
@@ -43,6 +62,8 @@ public class TowerDefenseManager : MonoBehaviour
         tower = GameObject.Find("Tower").GetComponent<TowerDefenseObjects>();
         tower.levelInfo = levelInfo;
         tower.towerManager = this;
+
+        RefreshUI();
     }
 
     // Update Functions
@@ -51,6 +72,20 @@ public class TowerDefenseManager : MonoBehaviour
     void FixedUpdate()
     {
 
+    }
+
+    // UI Functions
+    // ---------------------
+
+    public void RefreshUI()
+    {
+        // Money
+        uiReference.moneyText.text = uiReference.moneyString + player.currentMoney;
+
+        // Vague
+        int wave = enemyWaveIndex++;
+        string currentWave = wave + " / " + levelInfo.enemyWaves.Length + " Vagues";
+        uiReference.vagueText.text = currentWave;
     }
 
     // Mission Functions
@@ -63,6 +98,11 @@ public class TowerDefenseManager : MonoBehaviour
         
         // Call Functions
         StartCoroutine("SpawnEnemyWave");
+
+        // Fade
+        uiReference.startBtn.DOFade(0, uiReference.timeDuration).SetEase(Ease.InOutCirc);
+        uiReference.startBtn.interactable = false;
+        uiReference.startBtn.blocksRaycasts = false;
     }
 
     public void MissionFailed()
@@ -107,6 +147,8 @@ public class TowerDefenseManager : MonoBehaviour
     {
         if(enemyWaveIndex < levelInfo.enemyWaves.Length)
         {
+            RefreshUI();
+
             // Change Time UI
             yield return new WaitForSeconds(levelInfo.enemyWaves[enemyWaveIndex].timeBetweenWave);
 
