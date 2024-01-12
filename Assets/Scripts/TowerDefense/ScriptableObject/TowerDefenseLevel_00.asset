@@ -13,10 +13,18 @@ MonoBehaviour:
   m_Name: TowerDefenseLevel_00
   m_EditorClassIdentifier: 
   levelLimit:
-    minPos: {x: -10, y: -15}
-    maxPos: {x: 10, y: 15}
-  floorLevel: 0.5
-  destination: {x: 0, y: 0, z: 0}
-  moneyAtStart: 0
-  moneyPerSeconds: 0
-  enemyWaves: []
+    minPos: {x: -10, y: -10}
+    maxPos: {x: 10, y: 10}
+  floorLevel: 0.75
+  destination: {x: 0, y: 0, z: 15}
+  moneyAtStart: 30
+  moneyPerSeconds: 3
+  enemyWaves:
+  - enemiesPrefab: {fileID: 4358032180554144331, guid: 5a2982a39095407418a584cd9c373784,
+      type: 3}
+    spawnLocation:
+      position: {x: 0, y: 0, z: -15}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+    numberToSpawn: 8
+    timeBetweenSpawn: 2.5
+    timeBetweenWave: 8
