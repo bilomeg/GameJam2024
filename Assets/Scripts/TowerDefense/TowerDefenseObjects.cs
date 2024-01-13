@@ -130,6 +130,7 @@ public class TowerDefenseObjects : MonoBehaviour
         // Spawn Particles
 
         towerManager.CheckIfEnd();
+        towerManager.RefreshUI();
         Destroy(gameObject);
     }
 
